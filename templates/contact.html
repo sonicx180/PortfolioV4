@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Contact | Conner Ow</title>
+  <link href="/files/style.css" rel="stylesheet" type="text/css" />
+  <link href="/files/dragon-icon.svg" rel="icon" type="text/css" />
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+</head>
+
+<body>
+  <div id="navbar" class="nav-hide">
+    <a href="/">
+      <div class="navlink"><i data-feather="home"></i> Home</div>
+    </a>
+    <a href="/about">
+      <div class="navlink"><i data-feather="info"></i> About Me</div>
+    </a>
+    <a href="/work">
+      <div class="navlink"><i data-feather="monitor"></i> Work</div>
+    </a>
+    <a href="/blog">
+      <div class="navlink"><i data-feather="list"></i> Blog</div>
+    </a>
+    <a href="/hire">
+      <div class="navlink"><i data-feather="code"></i> Hire Me</div>
+    </a>
+    <a href="/contact">
+      <div class="navlink"><i data-feather="phone"></i> Contact</div>
+    </a>
+  </div>
+  <div id="nav-btn" class="btn-out" onclick="toggleNav()">
+    <i data-feather="menu" id="menu-icon-nav"></i>
+  </div>
+
+  <h1>Contact Me</h1>
+  <h3>Email Address: <a href="mailto:connerow1115@gmail.com">connerow1115@gmail.com</a></h3>
+  <h3>Discord Handle: <a>LeviathanProgramming#2139</a></h3>
+  <h3>Phone Number: <a>N/A (I don't have a phone)</a></h3>
+
+  </div>
+  <div style="background: var(--bg-4);">
+    <svg viewbox="0 0 800 200" fill="var(--bg-5)">
+      <path d="M 0 100 C 200 50 250 200 400 200 C 550 200 600 50 800 100 L 800 0 L 0 0 L 0 100"/>
+    </svg>
+    <h2>Platforms</h2>
+  <div id="skill-grid" class="xcenter-rel">
+    <a href="https://replit.com/@LeviathanCoding"><img src="/files/replit.svg"></a>
+    <a href="https://github.com/Conner1115"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></a>
+    <img src="https://github.com/Steffan153/Steffan153/raw/main/icons/codepen.svg" style="background: white;">
+    <a href="https://dev.to/leviathanprogramming"><img src="https://cdn.worldvectorlogo.com/logos/devto.svg" style="background:white;border-radius: 15px;"></a>
+    <a href="https://www.indiehackers.com/LeviathanProgramming/"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAALVBMVEX///8OJDnCxcgAACYAAB309PXV2NsAACMAGjJjanQAAADS1dm/wcT8/PxfZ3HuD327AAABOklEQVR4nO3cy26DQBBFQb9IiF///7ne3sVIxB06ErhqfUdwtiPE4QAAAAAAAAAAAAAAAAAAtJtuXwO3x9/H4TE+N61eM3K/fg9cxw9/axym8bn76jUjp/Nx4DJ+6bfGYbqMzp1Pq9eMKKyPg8JWCuvjoLCVwvo4KGylsD4OClsprI+DwlYK6+OgsJXC+jgobKWwPg4KWymsj4PCVgrr46CwlcL6OChspfA34+UvFTZeOD9/FjznbRce50XDYxsqLFKoUKFChQoVKlSoUKFChQoVKvznwt3f0+z/rm3/96UfcOetUGEvhfVxUNhKYX0cFLZSWB8Hha0U1sdBYSuF9XFQ2EphfRwUtlJYHweFrRTWx0FhK4X1cVDYSmF9HBS22n/h/v9fuv9/0AIAAAAAAAAAAAAAAADAh3sByCUzq77/dHQAAAAASUVORK5CYII="></a>
+    <a href="https://www.codingame.com/profile/a8e83723bd266272a4564fe2bcd6a7907926134"><img src="https://iconape.com/wp-content/png_logo_vector/codingame.png"></a>
+    <a href="https://devpost.com/Conner1115"><img src="https://pbs.twimg.com/profile_images/625987202909085696/KKYbLP8y_400x400.jpg"></a>
+    <a href="https://stackoverflow.com/users/15147999/leviathanprogramming"><img src="https://cdn.worldvectorlogo.com/logos/stack-overflow.svg"></a>
+
+  </div>
+  <p style="text-align: center;">Yup, that's all.  I don't got any of 'em big 'uns yet.</p>
+  </div>
+  <div style="padding-bottom: 100px;">
+    <svg viewbox="0 0 800 150" fill="var(--bg-4)">
+      <path d="M 0 100 C 150 200 250 0 400 0 C 550 0 650 200 800 100 L 800 0 L 0 0 L 0 100"/>
+    </svg>
+    <h1>Want to stay in the know?</h1>
+    <h3>Subscribe to me here!</h3>
+    <form id="subscribe-form" method="POST" action="/subscribe">
+      <input class="input xcenter-rel" name="email" placeholder="you@email.com" required>
+      <div class="h-captcha" data-sitekey="124ace2d-8845-47ab-b258-05cf91845687" data-theme="dark" data-callback="allowSubmit"></div>
+      <input type="submit" value="subscribe" class="submit xcenter-rel" style="margin: 0;" id="sub-submit" disabled>
+    </form>
+  </div>
+  
+  <script src="/files/script.js"></script>
+  <script>
+    function allowSubmit(){
+      $("#sub-submit").disabled = false;
+    }
+  </script>
+</body>
+
+</html>

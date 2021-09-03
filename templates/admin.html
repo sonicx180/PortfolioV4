@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Administration Page</title>
+  <link href="/files/style.css" rel="stylesheet" type="text/css" />
+  <link href="/files/dragon-icon.svg" rel="icon" type="text/css" />
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+</head>
+
+<body style="background: var(--bg-4)">
+  <form method="POST" action="/add-project" class="admin-form xcenter-rel">
+    <h3>Add Project</h3>
+    <select name="category" class="submit">
+      <option value="website">Websites</option>
+      <option value="game">Games</option>
+      <option value="misc">Other</option>
+    </select>
+    <input name="title" placeholder="Project Title" id="title" class="input">
+    <input name="description" placeholder="Project Description" id="description" class="input">
+    <input name="url" placeholder="project URL" class="input">    
+    <input name="i-url" placeholder="Image URL" id="i-url" class="input">
+    <input name="password" type="password" placeholder="Confirm Password" class="input">
+    <input type="submit" class="submit">
+  </form>
+  <form method="POST" action="/edit-project" class="admin-form xcenter-rel">
+    <h3>Edit Project</h3>
+    <select id="select-proj-1" class="submit" name="projid">
+    </select>
+    <input name="title" placeholder="Project Title" class="input">
+    <input name="description" placeholder="Project Description" class="input">
+    <input name="i-url" placeholder="Image URL" class="input">
+    <input name="password" type="password" placeholder="Confirm Password" class="input">
+    <input type="submit" class="submit">
+  </form>
+  <form method="POST" action="/del-project" class="admin-form xcenter-rel">
+    <h3>Delete Project</h3>
+    <select id="select-proj-2" class="submit" name="projid">
+    </select>
+    <input name="password" type="password" placeholder="Confirm Password" class="input">
+    <input type="submit" class="submit">
+  </form>
+  <form method="POST" action="/add-blogpost" class="admin-form xcenter-rel">
+    <h3>Add Blogpost</h3>
+    <input name="title" placeholder="Post Title" id="title" class="input">
+    <input name="url" placeholder="Post URL" class="input">
+    <input name="i-url" placeholder="Post Image URL" class="input">
+    <input name="password" type="password" placeholder="Confirm Password" class="input">
+    <input type="submit" class="submit">
+  </form>
+
+  <form method="POST" action="/edit-blogpost" class="admin-form xcenter-rel">
+    <h3>Edit Blogpost</h3>
+    <select id="select-blog-1" class="submit" name="postid">
+    </select>
+    <input name="title" placeholder="Post Title" id="title" class="input">
+    <input name="url" placeholder="Post URL (optional)" class="input">
+    <input name="i-url" placeholder="Post Image URL" class="input">
+    <input name="password" placeholder="Confirm Password" class="input" type="password">
+    <input type="submit" class="submit">
+  </form>
+
+  <form method="POST" action="/del-blogpost" class="admin-form xcenter-rel">
+    <h3>Delete Blogpost</h3>
+    <select id="select-blog-2" class="submit" name="postid">
+    </select>
+    <input name="password" type="password" placeholder="Confirm Password" class="input">
+    <input type="submit" class="submit">
+  </form>
+  
+  <form method="POST" action="/message-sub" class="admin-form xcenter-rel">
+    <h3>Message Subscribers</h3>
+    <input class="input" name="title" placeholder="Email Title">
+    <textarea name="cont" class="input" placeholder="write subscribers..." rows="3"></textarea>
+    <input name="password" type="password" placeholder="Confirm Password" class="input">
+    <input type="submit" class="submit">
+  </form>
+
+  <form method="POST" action="/del-sub" class="admin-form xcenter-rel">
+    <h3>Remove subscriber</h3>
+    <input name="email" placeholder="Subscriber Email" class="input">
+    <input name="password" type="password" placeholder="Confirm Password" class="input">
+    <input type="submit" class="submit">
+    <details id="subscribers-all" style="font-size: 20px;" class="xcenter-rel">
+    <summary>All Subscribers</summary>
+  </details>
+  </form>
+
+
+  
+
+  <script src="/files/script.js"></script>
+  <script>
+    if(!document.cookie){
+      document.body.innerHTML = "<h1>Log Into Admin</h1>";
+    }
+    (async () => {
+      let projects = await getJSON('/api/projects');
+      for(var p of projects){
+        $("#select-proj-1").innerHTML += `<option value="${p._id}">${p.title}</option>`;
+        $("#select-proj-2").innerHTML += `<option value="${p._id}">${p.title}</option>`;     
+      }
+      let posts = await getJSON('/api/posts');
+      for(var p of posts){
+        $("#select-blog-1").innerHTML += `<option value="${p._id}">${p.title}</option>`;
+        $("#select-blog-2").innerHTML += `<option value="${p._id}">${p.title}</option>`;     
+      }
+      let subs = await getJSON("/api/emails");
+      for(var s of subs){
+        $("#subscribers-all").innerHTML += `<div>${s.email}</div>`
+      }
+    })();
+  </script>
+</body>
+
+</html>

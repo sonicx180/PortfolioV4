@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Blog | Conner Ow</title>
+  <link href="/files/style.css" rel="stylesheet" type="text/css" />
+  <link href="/files/dragon-icon.svg" rel="icon" type="text/css" />
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+</head>
+
+<body>
+  <div id="navbar" class="nav-hide">
+    <a href="/">
+      <div class="navlink"><i data-feather="home"></i> Home</div>
+    </a>
+    <a href="/about">
+      <div class="navlink"><i data-feather="info"></i> About Me</div>
+    </a>
+    <a href="/work">
+      <div class="navlink"><i data-feather="monitor"></i> Work</div>
+    </a>
+    <a href="/blog">
+      <div class="navlink"><i data-feather="list"></i> Blog</div>
+    </a>
+    <a href="/hire">
+      <div class="navlink"><i data-feather="code"></i> Hire Me</div>
+    </a>
+    <a href="/contact">
+      <div class="navlink"><i data-feather="phone"></i> Contact</div>
+    </a>
+  </div>
+  <div id="nav-btn" class="btn-out" onclick="toggleNav()">
+    <i data-feather="menu" id="menu-icon-nav"></i>
+  </div>
+
+  <div>
+    <h1>Blog</h1>
+    <p><a href="/contact">Subscribe</a> to me if you want to get the latest updates on my blog.  Otherwise, you can view all my posts here.</p>
+  </div>
+  <div style="background: var(--bg-4)">
+    <svg viewbox="0 0 800 150" fill="var(--bg-5)">
+      <path d="M 0 0 L 0 50 Q 150 50 300 100 Q 400 150 500 100 Q 650 50 800 50 L 800 0 L 0 0"/>
+    </svg>
+    <div class="responsive-grid" id="blog-grid"></div>
+  </div>
+  <div style="padding-bottom: 50px;">
+    <svg viewbox="0 0 800 150" fill="var(--bg-4)">
+      <path d="M 0 0 L 0 50 Q 150 150 300 100 Q 400 50 500 100 Q 650 150 800 50 L 800 0 L 0 0"/>
+    </svg>
+    <h3>It seems as though you've reached the end.</h3>
+    <a href="/"><button class="submit w-80 xcenter-rel" style="margin: 0;">Home</button></a>
+  </div>
+
+  <script src="/files/script.js"></script>
+  <script>
+    (async function() {
+      let data = await getJSON("/api/posts");
+      for(var d of data){
+        $("#blog-grid").innerHTML += `<a href="${d.url}">
+      <div class="blogpost">
+        <h3 class="post-title">${d.title}</h3>
+        <div class="post-img" style="background-image: url(${d.imageURL})"></div>
+      </div>
+      </a>`;
+      }
+    })();
+  </script>
+</body>
+
+</html>

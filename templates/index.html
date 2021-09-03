@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Conner Ow | LeviathanProgramming</title>
+  <link href="/files/style.css" rel="stylesheet" type="text/css" />
+  <link href="/files/dragon-icon.svg" rel="icon" type="text/css" />
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+  <div id="navbar" class="nav-hide">
+    <a href="/">
+      <div class="navlink"><i data-feather="home"></i> Home</div>
+    </a>
+    <a href="/about">
+      <div class="navlink"><i data-feather="info"></i> About Me</div>
+    </a>
+    <a href="/work">
+      <div class="navlink"><i data-feather="monitor"></i> Work</div>
+    </a>
+    <a href="/blog">
+      <div class="navlink"><i data-feather="list"></i> Blog</div>
+    </a>
+    <a href="/hire">
+      <div class="navlink"><i data-feather="code"></i> Hire Me</div>
+    </a>
+    <a href="/contact">
+      <div class="navlink"><i data-feather="phone"></i> Contact</div>
+    </a>
+  </div>
+  <div id="nav-btn" class="btn-out" onclick="toggleNav()">
+    <i data-feather="menu" id="menu-icon-nav"></i>
+  </div>
+
+  <div id="intro">
+    <div id="cov-film">
+      <div id="intro-left">
+        <div id="intro-box">
+          <h1>CONNER OW</h1>
+          <h3>Not your standard Fullstack Developer</h3>
+          <div id="par-breaker"></div>
+          <p>I'm a Fullstack developer that lives out in the country. I develop everything from Video Games to
+            E-Commerce websites.</p>
+          <a href="/about"><button class="submit" style="margin: 20px 0;">About Me</button></a>
+        </div>
+      </div>
+      <div id="intro-right">
+        <div id="intro-buttons">
+          <a href="/work">
+            <div class="nav-xlink"><i data-feather="chevron-right"></i> See my Work</div>
+          </a>
+          <a href="/blog">
+            <div class="nav-xlink"><i data-feather="chevron-right"></i> Blog</div>
+          </a>
+          <a href="/contact">
+            <div class="nav-xlink"><i data-feather="chevron-right"></i> Contact Me</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="sec-1">
+    <svg viewbox="0 0 800 200" fill="var(--bg-4)" style="margin-top:-5px;">
+      <path d="M 0 0 L 800 0 L 800 50 Q 500 50 400 100 Q 200 200 0 150 L 0 0"/>
+    </svg>
+    <h1>Hey there, fellas!</h1>
+    <p>I am a fifteen-year-old fullstack developer that lives in Texas. Coding is something I really enjoy and something
+      that I always will have interest in.</p>
+    <p>I really enjoy making websites of all kinds as well as Discord Bots, games, and more!</p>
+    <p>Currently, I'm looking to start my own web development business by building some websites for people.</p>
+    <a href="/about" class="head-link">Read More &gt;&gt;</a>
+    <svg viewbox="0 0 800 150" class="svg-bot" fill="var(--bg-4)">
+      <path d="M 0 150 L 800 150 L 800 0 Q 600 0 400 50 Q 200 100 0 100 L 0 150 "/>
+    </svg>
+  </div>
+  <div id="sec-2">
+    <div id="ft-parent">
+
+      <div class="ft">
+        <div class="ft-icon">
+          <i data-feather="smartphone"></i>
+        </div>
+        <div class="ft-desc">
+          <h3>Responsive Design</h3>
+          <p>I make sure that every website I make works on almost any device. You can always count on me to make your
+            sites fit everywhere.</p>
+        </div>
+      </div>
+
+      <div class="ft">
+        <div class="ft-icon">
+          <i data-feather="check-circle"></i>
+        </div>
+        <div class="ft-desc">
+          <h3>Sustainable Quality</h3>
+          <p>Persistance, Equity, Skill, and Design are four elements I keep at my side when developing for others. With
+            more than four years of programming experience, I will unleash my skills to ensure that you more than
+            satisfied with your website.</p>
+        </div>
+      </div>
+
+      <div class="ft">
+        <div class="ft-icon">
+          <i data-feather="clock"></i>
+        </div>
+        <div class="ft-desc">
+          <h3>Always On Time</h3>
+          <p>You can call me lots of things, but you can't call me late. Time is priceless and I try my best to make use
+            of every second. You can count on me to get your website done before or on the deadline every single time.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="sec-3">
+    <svg viewbox="0 0 800 150" fill="var(--bg-4)">
+      <path d="M 0 0 Q 250 150 400 150 Q 550 150 800 0 L 0 0"></path>
+    </svg>
+    <h1>Work</h1>
+    <div class="responsive-grid" id="project-grid-index"></div>
+    <a class="head-link" href="/work">See More &gt;&gt;</a>
+  </div>
+  <div id="sec-4" style="background:var(--bg-4);padding-bottom: 100px;">
+    <svg viewbox="0 0 800 200" fill="var(--bg-5)">
+      <path d="M 0 0 Q 150 200 400 100 Q 600 50 800 150 L 800 0 L 0 0"/>
+    </svg>
+    <h1>Coding is Boundless</h1>
+    <p>Need a website for a considerably cheap price? I've got you covered. I can make anything from a single-page
+      personal website to a customizeable, multiplate eCommerce store!</p>
+    <a href="/hire"><button class="submit xcenter-rel w-80" style="margin:50px 0 0 0;">Hire Me</button></a>
+  </div>
+  <script src="/files/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <script>
+    (async function() {
+      let data = await getJSON("/api/projects");
+      for(var i = 0; i < (data.length<3?data.length:3); i++){
+        let d = data[i];
+        $("#project-grid-index").innerHTML += `<a href="${d.url}" target="_blank">
+        <div class="project"
+          style="background-image:url(${d.imageURL})">
+          <div class="p-info">
+            <div class="p-title">${d.title} <i data-feather="external-link"></i></div>
+            <div class="p-desc">${d.desc}</div>
+          </div>
+
+        </div>
+      </a>`;
+      }
+    })();
+  </script>
+  <script>
+    let arcs = [];
+    function configArcs() {
+      arcs = [];
+      let gr = windowWidth;
+      if (windowHeight > windowWidth) gr = windowHeight;
+      for (var i = 0; i < Math.floor(gr / 20); i++) {
+        arcs.push({
+          d: random(50, gr),
+          ang1: random(0, 90),
+          ang2: random(90, 270),
+          r: random(0, 360),
+          s: random(-0.1, 0.1),
+          op: random(25, 150),
+          sr: random(5, 30),
+        })
+      }
+    }
+    function setup() {
+      let c = createCanvas(windowWidth, $("#intro-left").offsetHeight);
+      c.parent("#intro");
+      angleMode(DEGREES);
+      configArcs();
+    }
+
+    function draw() {
+      background(25);
+      arcs.forEach(a => {
+        push();
+        translate(width / 2, height / 2);
+        rotate(a.r);
+        a.r += a.s;
+        strokeWeight(a.sr);
+        strokeCap(SQUARE);
+        stroke(255, 125, 0, a.op);
+        noFill();
+        arc(0, 0, a.d, a.d, a.ang1, a.ang2)
+        pop();
+      });
+
+    }
+    function windowResized() {
+      configArcs();
+      resizeCanvas(windowWidth, $("#intro-left").offsetHeight);
+    }
+  </script>
+</body>
+
+</html>

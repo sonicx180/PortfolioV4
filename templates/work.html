@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Work | Conner Ow</title>
+  <link href="/files/style.css" rel="stylesheet" type="text/css" />
+  <link href="/files/dragon-icon.svg" rel="icon" type="text/css" />
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+  <div id="navbar" class="nav-hide">
+    <a href="/">
+      <div class="navlink"><i data-feather="home"></i> Home</div>
+    </a>
+    <a href="/about">
+      <div class="navlink"><i data-feather="info"></i> About Me</div>
+    </a>
+    <a href="/work">
+      <div class="navlink"><i data-feather="monitor"></i> Work</div>
+    </a>
+    <a href="/blog">
+      <div class="navlink"><i data-feather="list"></i> Blog</div>
+    </a>
+    <a href="/hire">
+      <div class="navlink"><i data-feather="code"></i> Hire Me</div>
+    </a>
+    <a href="/contact">
+      <div class="navlink"><i data-feather="phone"></i> Contact</div>
+    </a>
+  </div>
+  <div id="nav-btn" class="btn-out" onclick="toggleNav()">
+    <i data-feather="menu" id="menu-icon-nav"></i>
+  </div>
+
+  <div id="work-intro">
+    <div id="w-intro-box" class="center-abs">
+      <h1 class="ycenter-rel">My Work</h1>
+    </div>
+  </div>
+  <div style="background: var(--bg-4)">
+    <svg viewbox="0 0 800 200" fill="var(--bg-5)">
+      <path d="M 0 0 L 0 150 Q 200 0 300 100 Q 350 200 500 150 Q 650 50 800 100 L 800 0 L 0 0 "/>
+    </svg>
+    <h3>Websites</h3>
+    <div class="responsive-grid" id="website-grid"></div>
+      </a>
+
+    </div>
+  </div>
+  <div>
+    <svg viewbox="0 0 800 100" fill="var(--bg-4)">
+      <path d="M 0 0 L 0 100 Q 400 0 800 100 L 800 0 L 0 0 "/>
+    </svg>
+    <h3>Games</h3>
+    <div class="responsive-grid" id="game-grid"></div>
+      </a>
+
+    </div>
+  </div>
+  <div style="background: var(--bg-4)">
+    <svg viewbox="0 0 800 200" fill="var(--bg-5)">
+      <path d="M 0 100 C 200 150 300 0 400 50 C 550 200 650 200 800 100 L 800 0 L 0 0 L 0 100 "/>
+    </svg>
+    <h3>Other</h3>
+    <div class="responsive-grid" id="misc-grid"></div>
+      </a>
+
+    </div>
+  </div>
+  <div style="padding-bottom: 100px;">
+    <svg viewbox="0 0 800 250" fill="var(--bg-4)">
+      <path d="M 0 100 C 200 150 300 300 400 200 C 550 100 650 200 800 100 L 800 0 L 0 0 L 0 100 "/>
+    </svg>
+    <h2>Any thoughts/feedback on my work?</h2>
+    <a href="/contact"><button class="submit w-80 xcenter-rel" style="margin: 0">Get in Touch</button></a>
+  </div>
+  
+  <script src="/files/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <script>
+    (async function() {
+      let data = await getJSON("/api/projects");
+      for(var d of data){
+        if(d.category == "website"){
+        $("#website-grid").innerHTML += `<a href="${d.url}" target="_blank">
+        <div class="project"
+          style="background-image:url(${d.imageURL})">
+          <div class="p-info">
+            <div class="p-title">${d.title} <i data-feather="external-link"></i></div>
+            <div class="p-desc">${d.desc}</div>
+          </div>
+
+        </div>
+      </a>`;
+        }else if(d.category == "game"){
+          $("#game-grid").innerHTML += `<a href="${d.url}" target="_blank">
+        <div class="project"
+          style="background-image:url(${d.imageURL})">
+          <div class="p-info">
+            <div class="p-title">${d.title} <i data-feather="external-link"></i></div>
+            <div class="p-desc">${d.desc}</div>
+          </div>
+
+        </div>
+      </a>`;
+        }else{
+          $("#misc-grid").innerHTML += `<a href="${d.url}" target="_blank">
+        <div class="project"
+          style="background-image:url(${d.imageURL})">
+          <div class="p-info">
+            <div class="p-title">${d.title} <i data-feather="external-link"></i></div>
+            <div class="p-desc">${d.desc}</div>
+          </div>
+
+        </div>
+      </a>`;
+        }
+      }
+    })();
+  </script>
+  <script>
+    let r = [];
+    function configRain() {
+      arcs = [];
+      let gr = windowWidth;
+      if (windowHeight > windowWidth) gr = windowHeight;
+      for (var i = 0; i < Math.floor(gr/2); i++) {
+        r.push({
+          x: random(0,width),
+          y: 0,
+          s: random(10, 50),
+          op: random(10, 150)
+        })
+      }
+    }
+
+    function setup() {
+      let c = createCanvas(windowWidth, $("#work-intro").offsetHeight);
+      c.parent("#work-intro");
+      angleMode(DEGREES);
+      configRain();
+    }
+
+    function draw() {
+      background(25);
+      noStroke();
+      r.forEach(a => {
+        push();
+        translate(a.x,a.y)
+        rotate(a.s * frameCount / 100);
+        a.y += a.s/10;
+        a.s -= 0.05;
+        fill(255, 125, 0, a.op);
+        rect(-a.s/2,-a.s/2,a.s,a.s)
+        pop();
+        if(a.y > height + 100){
+          a.y = -100;
+          a.s = random(10, 50)
+          a = {
+          x: random(0,width),
+          y: -100,
+          s: random(10, 50),
+          op: random(10, 150)
+        };
+        }
+        if(a.y < -100){
+          a.y = -100;
+          a.s = random(10, 50)
+        }
+      });
+
+    }
+    function windowResized() {
+      configRain();
+      resizeCanvas(windowWidth, $("#work-intro").offsetHeight);
+    }
+  </script>
+</body>
+
+</html>

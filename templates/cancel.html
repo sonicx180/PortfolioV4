@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Payment Canceled</title>
+  <link href="/files/style.css" rel="stylesheet" type="text/css" />
+  <link href="/files/dragon-icon.svg" rel="icon" type="text/css" />
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+</head>
+
+<body>
+    
+  
+  <div id="page-intro">
+    <div id="p-box" class="center-abs" style="width: 80%;height: 80%;">
+    <h1>Payent Canceled</h1>
+    <h2>Your payment was aborted.</h2>
+    <a class="head-link" href="/">Return Home</a></div>
+  </div>
+
+  <script src="/files/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <script>
+    let arcs = [];
+    function configArcs() {
+      arcs = [];
+      let gr = windowWidth;
+      if (windowHeight > windowWidth) gr = windowHeight;
+      for (var i = 0; i < Math.floor(gr / 20); i++) {
+        arcs.push({
+          d: random(50, gr),
+          ang1: random(0, 90),
+          ang2: random(90, 270),
+          r: random(0, 360),
+          s: random(-0.1, 0.1),
+          op: random(25, 150),
+          sr: random(5, 30),
+        })
+      }
+    }
+    function setup() {
+      let c = createCanvas(windowWidth, windowHeight);
+      c.parent("#page-intro");
+      angleMode(DEGREES);
+      configArcs();
+    }
+
+    function draw() {
+      background(25);
+      arcs.forEach(a => {
+        push();
+        translate(width / 2, height / 2);
+        rotate(a.r);
+        a.r += a.s;
+        strokeWeight(a.sr);
+        strokeCap(SQUARE);
+        stroke(255, 125, 0, a.op);
+        noFill();
+        arc(0, 0, a.d, a.d, a.ang1, a.ang2)
+        pop();
+      });
+
+    }
+    function windowResized() {
+      configArcs();
+      resizeCanvas(windowWidth, windowHeight);
+    }
+  </script>
+</body>
+
+</html>

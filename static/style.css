@@ -202,7 +202,7 @@ hr{
 #menu-icon-nav{
   width: 30px;
   height: 30px;
-  transform: translate(4px, 4px);
+  transform: translate(5px, 5px);
 }
 #nav-btn:hover{
   background: rgba(255,255,255,0.2);
@@ -573,6 +573,14 @@ hr{
   }
   .project{
     width: 300px;
+  }
+  p{
+    line-height: 30px;
+    font-size: 18px;
+    padding: 10px 10%;
+  }
+  h1,h2,h3,h4,h5,h6{
+    margin-bottom: 25px;
   }
 
 h1 {

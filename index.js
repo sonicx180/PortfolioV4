@@ -8,7 +8,6 @@ const cookieParser = require("cookie-parser");
 const cors = require('cors');
 const fetch = require("superagent");
 const nodemailer = require("nodemailer");
-const emailCheck = require('email-check');
 const Schema = mongoose.Schema;
 const rateLimit = require("express-rate-limit");
 const stripe = require("stripe")(process.env.STRIPE_SK);

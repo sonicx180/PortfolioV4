@@ -42,12 +42,12 @@ function sendEmail(to, subject, message) {
 
   let mailDetails = {
     from: 'conner.ow.dev@gmail.com',
-    to: 'connerow1115@gmail.com, '+to,
+    to: 'connerow1115@gmail.com, ' + to,
     subject: subject,
     text: message
   };
 
-  mailTransporter.sendMail(mailDetails, function(err, data) {
+  mailTransporter.sendMail(mailDetails, function (err, data) {
     if (err) console.error(err)
   });
 }
@@ -69,8 +69,8 @@ const apiLimiter = rateLimit({
 app.use("/subscribe", apiLimiter);
 app.use("/em-hire", apiLimiter);
 
-function renderFile(file){
-  return (req, res) => res.sendFile(path.join(__dirname, "/templates/"+file))
+function renderFile(file) {
+  return (req, res) => res.sendFile(path.join(__dirname, "/templates/" + file))
 }
 
 app.get("/", renderFile("index.html"));
@@ -86,31 +86,30 @@ app.get("/pay/basic", renderFile("paybasic.html"))
 app.get("/pay/standard", renderFile("paystandard.html"))
 app.get("/pay/premium", renderFile("paypremium.html"))
 app.get("/pay/super", renderFile("paysuper.html"))
-app.get("/cancel", renderFile("cancel.html"))
 app.get("/success", renderFile("success.html"))
 app.get("/files/:file", (req, res) => {
-  res.sendFile(path.join(__dirname, "/static/"+req.params.file))
+  res.sendFile(path.join(__dirname, "/static/" + req.params.file))
 })
 
 app.get("/api/projects", async (req, res) => {
-  let data = await Project.find({__v: 0});
+  let data = await Project.find({ __v: 0 });
   res.send(data);
 })
 app.get("/api/posts", async (req, res) => {
-  let data = await Post.find({__v: 0});
+  let data = await Post.find({ __v: 0 });
   res.send(data);
 })
 app.get("/api/emails", async (req, res) => {
-  if(req.cookies.cookie==decodeURIComponent(process.env.admin_session)){
-    let data = await Sub.find({__v: 0});
+  if (req.cookies.cookie == decodeURIComponent(process.env.admin_session)) {
+    let data = await Sub.find({ __v: 0 });
     res.send(data);
-  }else{
+  } else {
     res.status(401).send("Unauthorized")
   }
 })
 
 app.post("/add-project", async (req, res) => {
-  if(req.body.password == process.env.admin_password && req.cookies.cookie == decodeURIComponent(process.env.admin_session)){
+  if (req.body.password == process.env.admin_password && req.cookies.cookie == decodeURIComponent(process.env.admin_session)) {
     let proj = new Project({
       title: req.body.title,
       desc: req.body.description,
@@ -119,142 +118,147 @@ app.post("/add-project", async (req, res) => {
       category: req.body.category
     });
     proj.save((e, d) => {
-      if(e)console.error(e);
+      if (e) console.error(e);
       else res.status(200).redirect("/proto-admin-1115")
     })
-  }else{
+  } else {
     res.send({ error: "Unauthorized Request", success: false })
   }
 })
 app.post("/del-project", async (req, res) => {
-  if(req.body.password == process.env.admin_password && req.cookies.cookie == decodeURIComponent(process.env.admin_session)){
-    Project.remove({_id: req.body.projid }, (e, d) => {
-      if(e)console.error(e);
-      else{
+  if (req.body.password == process.env.admin_password && req.cookies.cookie == decodeURIComponent(process.env.admin_session)) {
+    Project.remove({ _id: req.body.projid }, (e, d) => {
+      if (e) console.error(e);
+      else {
         res.status(200).redirect("/proto-admin-1115");
       }
     });
-  }else{
+  } else {
     res.send({ error: "Unauthorized Request", success: false })
   }
 })
 app.post("/edit-project", async (req, res) => {
-  if(req.body.password == process.env.admin_password && req.cookies.cookie == decodeURIComponent(process.env.admin_session)){
-    Project.findOne({_id: req.body.projid}, (e, d) => {
-      if(e)console.error(e);
-      else{
+  if (req.body.password == process.env.admin_password && req.cookies.cookie == decodeURIComponent(process.env.admin_session)) {
+    Project.findOne({ _id: req.body.projid }, (e, d) => {
+      if (e) console.error(e);
+      else {
         d.title = req.body.title;
         d.desc = req.body.description;
         d.imageURL = req.body['i-url'];
         d.save((e, D) => {
-      if(e)console.error(e);
-      else res.status(200).redirect("/proto-admin-1115")
-    })
+          if (e) console.error(e);
+          else res.status(200).redirect("/proto-admin-1115")
+        })
       }
     });
-  }else{
+  } else {
     res.send({ error: "Unauthorized Request", success: false })
   }
 })
 
 
 app.post("/del-sub", async (req, res) => {
-  if(req.body.password == process.env.admin_password && req.cookies.cookie == decodeURIComponent(process.env.admin_session)){
-  Sub.findOne({ email: req.body.email }, (e, d) => {
-    if(e)console.error(e);
-    else{
-      if(d){
-        Sub.remove({ email: req.body.email }, (er, r) => {
-          if(er)console.error(er);
-          else{
-            res.status(200).redirect("/proto-admin-1115")
-          }
-        });
-      }else{
-        res.status(404).json({ error: "User not found", success: false })
+  if (req.body.password == process.env.admin_password && req.cookies.cookie == decodeURIComponent(process.env.admin_session)) {
+    Sub.findOne({ email: req.body.email }, (e, d) => {
+      if (e) console.error(e);
+      else {
+        if (d) {
+          Sub.remove({ email: req.body.email }, (er, r) => {
+            if (er) console.error(er);
+            else {
+              res.status(200).redirect("/proto-admin-1115")
+            }
+          });
+        } else {
+          res.status(404).json({ error: "User not found", success: false })
+        }
       }
-    }
-  })
-  }else{
+    })
+  } else {
     res.send({ error: "Unauthorized Request", success: false })
   }
 })
 app.post("/message-sub", async (req, res) => {
-  if(req.body.password == process.env.admin_password && req.cookies.cookie == decodeURIComponent(process.env.admin_session)){
-  let subs = await Sub.find({__v: 0});
-  for(var i in subs){
-    sendEmail(subs[i].email, req.body.title, req.body.cont)
-  }
-  res.status(200).redirect("/proto-admin-1115")
-  }else{
+  if (req.body.password == process.env.admin_password && req.cookies.cookie == decodeURIComponent(process.env.admin_session)) {
+    let subs = await Sub.find({ __v: 0 });
+    for (var i in subs) {
+      sendEmail(subs[i].email, req.body.title, req.body.cont)
+    }
+    res.status(200).redirect("/proto-admin-1115")
+  } else {
     res.send({ error: "Unauthorized Request", success: false })
   }
 })
 app.post("/edit-blogpost", async (req, res) => {
-  if(req.body.password == process.env.admin_password && req.cookies.cookie == decodeURIComponent(process.env.admin_session)){
-    Post.findOne({_id: req.body.postid}, (e, d) => {
-      if(e)console.error(e);
-      else{
+  if (req.body.password == process.env.admin_password && req.cookies.cookie == decodeURIComponent(process.env.admin_session)) {
+    Post.findOne({ _id: req.body.postid }, (e, d) => {
+      if (e) console.error(e);
+      else {
         d.title = req.body.title;
         d.url = req.body.url;
         d.imageURL = req.body['i-url'];
         d.save((e, D) => {
-      if(e)console.error(e);
-      else res.status(200).redirect("/proto-admin-1115")
-    })
+          if (e) console.error(e);
+          else res.status(200).redirect("/proto-admin-1115")
+        })
       }
     });
-  }else{
+  } else {
     res.send({ error: "Unauthorized Request", success: false })
   }
 })
 app.post("/del-blogpost", async (req, res) => {
-  if(req.body.password == process.env.admin_password && req.cookies.cookie == decodeURIComponent(process.env.admin_session)){
-    Post.remove({_id: req.body.postid }, (e, d) => {
-      if(e)console.error(e);
-      else{
+  if (req.body.password == process.env.admin_password && req.cookies.cookie == decodeURIComponent(process.env.admin_session)) {
+    Post.remove({ _id: req.body.postid }, (e, d) => {
+      if (e) console.error(e);
+      else {
         res.status(200).redirect("/proto-admin-1115");
       }
     });
-  }else{
+  } else {
     res.send({ error: "Unauthorized Request", success: false })
   }
 })
 app.post("/add-blogpost", async (req, res) => {
-  if(req.body.password == process.env.admin_password && req.cookies.cookie == decodeURIComponent(process.env.admin_session)){
+  if (req.body.password == process.env.admin_password && req.cookies.cookie == decodeURIComponent(process.env.admin_session)) {
     let post = new Post({
       title: req.body.title,
       imageURL: req.body['i-url'],
       url: req.body.url
     });
     post.save((e, d) => {
-      if(e)console.error(e);
+      if (e) console.error(e);
       else res.status(200).redirect("/proto-admin-1115")
     })
-  }else{
+  } else {
     res.send({ error: "Unauthorized Request", success: false })
   }
 })
 app.post("/subscribe", async (request, res) => {
-  let data = await fetch.get("https://hcaptcha.com/siteverify?response="+request.body['h-captcha-response']+"&secret="+SECRET);
-  if(data.body.success){
-    let subscriber = new Sub({
-      email: request.body.email
-    });
-    subscriber.save((err, data) => {
-      if(err) { console.error(err); }
-      else{
-        sendEmail(request.body.email, "Thank you for subscribing!", "Hello, this is Conner/LeviathanProgramming.  Thank you for subscribing to me!  Stay tuned for future blog posts and new projects!\n\nIf at any time you think these emails aren't worth your time, simply respond to it and I will remove you.  Thanks once again!")
-        res.redirect("/subscribed")
-      }
-    });
-  }else{
+  let data = await fetch.get("https://hcaptcha.com/siteverify?response=" + request.body['h-captcha-response'] + "&secret=" + SECRET);
+  if (data.body.success) {
+    let old = await Sub.findOne({ email: request.body.email });
+    if (!old) {
+      let subscriber = new Sub({
+        email: request.body.email
+      });
+      subscriber.save((err, data) => {
+        if (err) { console.error(err); }
+        else {
+          sendEmail(request.body.email, "Thank you for subscribing!", "Hello, this is Conner/LeviathanProgramming.  Thank you for subscribing to me!  Stay tuned for future blog posts and new projects!\n\nIf at any time you think these emails aren't worth your time, simply respond to it and I will remove you.  Thanks once again!")
+          res.redirect("/subscribed")
+        }
+      });
+    }else{
+      res.sendFile(path.join(__dirname, "/templates/alreadysubbed.html"))
+    }
+  } else {
     res.json({ error: "Unauthorized - Suspected bot request", success: false })
   }
 })
 app.post("/em-hire", async (request, res) => {
-  let data = await fetch.get("https://hcaptcha.com/siteverify?response="+request.body['h-captcha-response']+"&secret="+SECRET);
-  if(data.body.success){
+  let data = await fetch.get("https://hcaptcha.com/siteverify?response=" + request.body['h-captcha-response'] + "&secret=" + SECRET);
+  if (data.body.success) {
     let form = request.body
     sendEmail(form.email, "Resouces needed for your website", `
     Hello, ${form.name}, thank you for assigning this task to me!
@@ -280,33 +284,33 @@ app.post("/em-hire", async (request, res) => {
     ----
     `)
     res.redirect("/hired")
-  }else{
+  } else {
     res.json({ error: "Unauthorized - Suspected bot request", success: false })
   }
 })
 app.post("/payment", async (req, res) => {
-    const { product } = req.body;
-    const session = await stripe.checkout.sessions.create({
-        payment_method_types: ["card"],
-        line_items: [
-            {
-                price_data: {
-                    currency: "usd",
-                    product_data: {
-                        name: product.name,
-                        //images: [product.image],
-                    },
-                    unit_amount: product.amount * 100,
-                },
-                quantity: product.quantity,
-            },
-        ],
-        mode: "payment",
-        success_url: `https://${req.headers.host}/success`,
-        cancel_url: `https://${req.headers.host}/cancel`,
-    });
+  const { product } = req.body;
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ["card"],
+    line_items: [
+      {
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: product.name,
+            //images: [product.image],
+          },
+          unit_amount: product.amount * 100,
+        },
+        quantity: product.quantity,
+      },
+    ],
+    mode: "payment",
+    success_url: `https://${req.headers.host}/success`,
+    cancel_url: `https://${req.headers.host}/`,
+  });
 
-    res.json({ id: session.id });
+  res.json({ id: session.id });
 });
 
 app.get("*", renderFile("404.html"))

@@ -68,7 +68,7 @@
   <script>
     (async function() {
       let data = await getJSON("/api/posts");
-      for(var d of data){
+      for(var d of data.reverse()){
         $("#blog-grid").innerHTML += `<a href="${d.url}">
       <div class="blogpost">
         <h3 class="post-title">${d.title}</h3>

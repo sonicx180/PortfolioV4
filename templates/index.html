@@ -146,7 +146,7 @@
   <script>
     (async function() {
       let data = await getJSON("/api/projects");
-      for(var i = 0; i < (data.length<3?data.length:3); i++){
+      for(var i = 0; i < (data.length<4?data.length:4); i++){
         let d = data[i];
         $("#project-grid-index").innerHTML += `<a href="${d.url}" target="_blank">
         <div class="project"

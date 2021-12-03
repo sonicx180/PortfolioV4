@@ -442,7 +442,6 @@ hr{
   transition: 0.25s;
   min-height: 300px;
   border-radius: 15px;
-  background: transparent;
 }
 .project > p{
   padding: 0 5px;
